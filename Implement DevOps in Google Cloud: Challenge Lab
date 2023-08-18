@@ -17,7 +17,9 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 git config --global user.email <email> 
 git config --global user.name <name>
 
+----------------------------------------------------------------------------------------------------------------------------
 Task 1. Create the lab resources
+----------------------------------------------------------------------------------------------------------------------------
 
 gcloud artifacts repositories create $REPO_NAME \
     --repository-format=docker \
@@ -28,7 +30,9 @@ gcloud beta container --project "$PROJECT_ID" clusters create "$CLUSTER_NAME" --
 kubectl create namespace prod	
 kubectl create namespace dev
 
+----------------------------------------------------------------------------------------------------------------------------
 Task 2. Create a repository in Cloud Source Repositories
+----------------------------------------------------------------------------------------------------------------------------
 
 gcloud source repos create sample-app
 git clone https://source.developers.google.com/p/$PROJECT_ID/r/sample-app
@@ -45,11 +49,14 @@ git branch dev
 git checkout dev
 git push -u origin dev
 
+----------------------------------------------------------------------------------------------------------------------------
 Task 3. Create the Cloud Build Triggers
 
 For Task 3 Follow Video Instructions.
 
+----------------------------------------------------------------------------------------------------------------------------
 Task 4. Deploy the first versions of the application
+----------------------------------------------------------------------------------------------------------------------------
 
 COMMIT_ID="$(git rev-parse --short=7 HEAD)"
 gcloud builds submit --tag="${REGION}-docker.pkg.dev/${PROJECT_ID}/$REPO_NAME/hello-cloudbuild:${COMMIT_ID}" .
@@ -67,10 +74,10 @@ git push -u origin master
 
 
 
-
-
-
+----------------------------------------------------------------------------------------------------------------------------
 Task 5. Deploy the second versions of the application
+----------------------------------------------------------------------------------------------------------------------------
+
 
 git checkout dev
 
@@ -84,6 +91,8 @@ git add .
 git commit -m "QUICK GCP LAB" 
 git push -u origin master
 
+----------------------------------------------------------------------------------------------------------------------------
 Task 6. Roll back the production deployment
 
 For Task 6 Follow Video Instructions.
+----------------------------------------------------------------------------------------------------------------------------
